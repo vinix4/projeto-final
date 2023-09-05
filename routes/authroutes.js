@@ -1,16 +1,20 @@
 import express from "express";
 import mongoose from "mongoose";
-import authSchema from "../models/authSchema.js";
+import { authentication } from "../models/authSchema.js";
 const router = express.Router();
-
-const authentications = mongoose.model("authentications", authSchema);
 
 router.post("/auth", async (req, res) => {
   try {
-    const query = await authentications.findOne({
+    const query = await authentication.findOne({
       email: req.body.email,
       password: req.body.password,
     });
+    console.log(query);
+    if (query) {
+      res.status(200).json({ message: "usurio encontrado" });
+    } else {
+      res.status(404).send("nenhum usuario");
+    }
     res.status(200).json({ message: "usuário encontrado" });
   } catch (error) {}
 });

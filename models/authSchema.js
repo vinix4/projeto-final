@@ -7,4 +7,4 @@ const authSchema = new mongoose.Schema({
   age: Number,
   password: String,
 });
-export default mongoose.model("Authentications", authSchema);
+export const authentication = mongoose.model("Authentication", authSchema);
